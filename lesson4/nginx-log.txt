@@ -1,0 +1,211 @@
+Script started on 2025-01-14 16:35:55+00:00 [TERM="xterm" TTY="/dev/pts/1" COLUMNS="93" LINES="49"]
+[?2004h]0;user@less4: ~user@less4:~$ exitjava -versionsudo update-java-alternatives --set java-1.21.0-openjdk-amd64[C[C[C[C[C[C[C[C[C[C[C[C[C[Cjava -version[Kexit[Kjava -versionsudo update-java-alternatives --set java-1.21.0-openjdk-amd64[C[C[C[C[C[C[C[C[C[C[C[C[C[Cjava -version[Kexit[K[Ksystemctl status nginx
+[?2004l[?1h=[0;1;32m●[0m nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://less4/usr/lib/systemd/system/nginx.service/usr/lib/systemd/system/nginx.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)[m
+     Active: [0;1;32mactive (running)[0m since Tue 2025-01-14 16:35:43 UTC; 26s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 4939 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=[m[7m>[27m
+    Process: 4941 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, s[m[7m>[27m
+   Main PID: 4942 (nginx)[m
+      Tasks: 3 (limit: 4556)[m
+     Memory: 2.4M (peak: 2.5M)[m
+        CPU: 33ms[m
+     CGroup: /system.slice/nginx.service[m
+             ├─[0;38;5;245m4942 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[0m[m
+             ├─[0;38;5;245m4943 "nginx: worker process"[0m[m
+             └─[0;38;5;245m4944 "nginx: worker process"[0m[m
+[m
+Jan 14 16:35:43 less4 systemd[1]: Starting nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:35:43 less4 systemd[1]: Started nginx.service - A high performance web server and [m[7m>[27m
+[7mlines 1-17/17 (END)[27m[K[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ systemctl status nginx[C[1P nginx[1P nginx[1P nginx[1P nginxo nginxp nginx
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ====
+[0mAuthentication is required to stop 'nginx.service'.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ systemctl stop nginx[2@atus[C[C[C[C[C[C
+[?2004l[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://less4/usr/lib/systemd/system/nginx.service/usr/lib/systemd/system/nginx.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)[m
+     Active: inactive (dead) since Tue 2025-01-14 16:36:20 UTC; 6s ago[m
+   Duration: 37.685s[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 4939 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=[m[7m>[27m
+    Process: 4941 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, s[m[7m>[27m
+    Process: 4971 ExecStop=/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /[m[7m>[27m
+   Main PID: 4942 (code=exited, status=0/SUCCESS)[m
+        CPU: 46ms[m
+[m
+Jan 14 16:35:43 less4 systemd[1]: Starting nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:35:43 less4 systemd[1]: Started nginx.service - A high performance web server and [m[7m>[27m
+Jan 14 16:36:20 less4 systemd[1]: Stopping nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:36:20 less4 systemd[1]: nginx.service: Deactivated successfully.[m
+Jan 14 16:36:20 less4 systemd[1]: Stopped nginx.service - A high performance web server and [m[7m>[27m
+[7mlines 1-16/16 (END)[27m[K[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ systemctl status nginx[1P nginx[1P nginx[1P nginx[1P nginx[1P nginx[1P nginxd nginxi nginxs nginxa nginxb nginxl nginxe nginx
+[?2004lSynchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable nginx
+[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0mupdate-rc.d: error: Permission denied
+[?2004h]0;user@less4: ~user@less4:~$ systemctl disable nginx
+[?2004lSynchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable nginx
+[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0mupdate-rc.d: error: Permission denied
+[?2004h]0;user@less4: ~user@less4:~$ systemctl disable nginx[C[1@s[1@u[1@d[1@o[1@ 
+[?2004l[sudo] password for user: 
+Synchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable nginx
+Removed "/etc/systemd/system/multi-user.target.wants/nginx.service".
+[?2004h]0;user@less4: ~user@less4:~$ sudo systemctl disable nginx[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pstatus[C[C[C[C[C[C
+[?2004l[?1h=○ nginx.service - A high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://less4/usr/lib/systemd/system/nginx.service/usr/lib/systemd/system/nginx.service]8;;; [0;1;38;5;185mdisabled[0m; preset: [0;1;32menabled[0m)[m
+     Active: inactive (dead)[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+[m
+Jan 14 15:59:03 less4 systemd[1]: Starting nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 15:59:03 less4 systemd[1]: Started nginx.service - A high performance web server and [m[7m>[27m
+Jan 14 16:34:28 less4 systemd[1]: Stopping nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:34:28 less4 systemd[1]: nginx.service: Deactivated successfully.[m
+Jan 14 16:34:28 less4 systemd[1]: Stopped nginx.service - A high performance web server and [m[7m>[27m
+Jan 14 16:35:43 less4 systemd[1]: Starting nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:35:43 less4 systemd[1]: Started nginx.service - A high performance web server and [m[7m>[27m
+Jan 14 16:36:20 less4 systemd[1]: Stopping nginx.service - A high performance web server and[m[7m>[27m
+Jan 14 16:36:20 less4 systemd[1]: nginx.service: Deactivated successfully.[m
+Jan 14 16:36:20 less4 systemd[1]: Stopped nginx.service - A high performance web server and [m[7m>[27m
+[7mlines 1-15/15 (END)[27m[K[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ [7msystemctl cat nginx[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[Csystemctl cat nginx
+[?2004l[?1h=[0;1;34m# ]8;;file://less4/usr/lib/systemd/system/nginx.service/usr/lib/systemd/system/nginx.service]8;;[0m[m
+[0;1;38;5;245m# Stop dance for nginx[0m[m
+[0;1;38;5;245m# =======================[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;38;5;245m# ExecStop sends SIGQUIT (graceful stop) to the nginx process.[0m[m
+[0;1;38;5;245m# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[0m[m
+[0;1;38;5;245m# and sends SIGTERM (fast shutdown) to the main process.[0m[m
+[0;1;38;5;245m# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[0m[m
+[0;1;38;5;245m# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;38;5;245m# nginx signals reference doc:[0m[m
+[0;1;38;5;245m# http://nginx.org/en/docs/control.html[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;36m[Unit][0m[m
+Description=A high performance web server and a reverse proxy server[m
+Documentation=man:nginx(8)[m
+After=network-online.target remote-fs.target nss-lookup.target[m
+Wants=network-online.target[m
+[0;1;38;5;245m[0m[m
+[0;1;36m[Service][0m[m
+Type=forking[m
+PIDFile=/run/nginx.pid[m
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[m
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[m
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[m
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[m
+TimeoutStopSec=5[m
+KillMode=mixed[m
+[0;1;38;5;245m[0m[m
+[0;1;36m[Install][0m[m
+WantedBy=multi-user.target[m
+[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ [7msudo nano /usr/lib/systemd/user/nginx2[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo nano /usr/lib/systemd/user/nginx2.service
+[?2004l[?2004h[?1049h[22;0;0t[1;49r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[47;41H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 7.2                 /usr/lib/systemd/user/nginx2.service                          [1;92H(B[m[48d(B[0;7m^G(B[m Help[48;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut[48;61H(B[0;7m^T(B[m Execute     (B[0;7m^C(B[m Location[49d(B[0;7m^X(B[m Exit[49;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Paste[61G(B[0;7m^J(B[m Justify     (B[0;7m^/(B[m Go To Line[2d[?12l[?25h[?25l[1;69H(B[0;7m*[47d(B[m[K[1;92H[2d[36m# Stop dance for nginx[3d# =======================[4d#[5d# ExecStop sends SIGQUIT (graceful stop) to the nginx process.[6d# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[7d# and sends SIGTERM (fast shutdown) to the main process.[8d# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[9d# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[10d#[11d# nginx signals reference doc:[12d# http://nginx.org/en/docs/control.html[13d#[14d(B[0;1m[32m[Unit][15d[39m(B[mDescription=A high performance web server and a reverse proxy server[16dDocumentation=man:nginx(8)[17dAfter=network-online.target remote-fs.target nss-lookup.target[18dWants=network-online.target[20d(B[0;1m[32m[Service][21d[39m(B[mType=forking[22dPIDFile=/run/nginx.pid[23dExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[24dExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[25dExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[26dExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[27dTimeoutStopSec=5[28dKillMode=mixed[30d(B[0;1m[32m[Install][31d[39m(B[mWantedBy=multi-user.target[32d[?12l[?25h[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[A[?25l[?12l[?25h[15d[?25l[?12l[?25hD[?25l[?12l[?25he[?25l[?12l[?25hs[?25l[?12l[?25hc[?25l[?12l[?25hr[?25l[?12l[?25hi[?25l[?12l[?25hp[?25l[?12l[?25ht[?25l[?12l[?25hi[?25l[?12l[?25ho[?25l[?12l[?25hn[?25l[?12l[?25h=[?25l[?12l[?25hNA high performance web server and a reverse proxy server[15;14H[?25l[?12l[?25heA high performance web server and a reverse proxy server[15;15H[?25l[?12l[?25hwA high performance web server and a reverse proxy server[15;16H[?25l[?12l[?25h A high performance web server and a reverse proxy server[15;17H[?25l[?12l[?25h[1P[?25l[?12l[?25h[1P [?25l[?12l[?25h[16d[?25l[?12l[?25h[17d[?25l[?12l[?25h[18d[?25l[?12l[?25h[19d[?25l[?12l[?25h[20;10H[?25l[?12l[?25h[21;13H[?25l[?12l[?25h[22;17H[?25l[?12l[?25h[23d[?25l[?12l[?25h[24d[?25l[?12l[?25h[25d[?25l[?12l[?25h[26d[?25l[?12l[?25h[27d[?25l[?12l[?25h[28d[?25l[?12l[?25h[29d[?25l[?12l[?25h[30;10H[?25l[?12l[?25h[31;17H[?25l[47d(B[0;7mSave modified buffer?                                                                        [48;1H Y(B[m Yes[K[49d(B[0;7m N(B[m No  [49;16H (B[0;7m^C(B[m Cancel[K[47;23H[?12l[?25h[?25l[48d(B[0;7m^G(B[m Help[48;24H(B[0;7mM-D(B[m DOS Format[48;47H(B[0;7mM-A(B[m Append[48;70H(B[0;7mM-B(B[m Backup File[49d(B[0;7m^C(B[m Cancel[17G       (B[0;7mM-M(B[m Mac Format[49;47H(B[0;7mM-P(B[m Prepend[49;70H(B[0;7m^T(B[m Browse[47d(B[0;7mFile Name to Write: /usr/lib/systemd/user/nginx2.service(B[m[?12l[?25h[?25l[47;39H[1K (B[0;7m[ Writing... ](B[m[K[1;69H(B[0;7m [92G(B[m[47;38H(B[0;7m[ Wrote 30 lines ](B[m[J[49d[?12l[?25h[49;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;user@less4: ~user@less4:~$ sudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Pystemctl cat nginx[K[K[K[K[K[K[K[K[Kdaemon-reload 
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ systemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Pystemctl cat nginx[3@status[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6@udo systemctl disable[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pstatus[C[C[C[C[C[C[2Pop[C[C[C[C[C[C[2@atus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kjava -versionsudo update-java-alternatives --set java-1.21.0-openjdk-amd64[C[C[C[C[C[C[C[C[C[C[C[C[C[Cjava -version[Kexit[Ksystemctl status nginx[2Pop[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[Klist-unitsstatus nginx[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kjava -versionsudo update-java-alternatives --set java-1.21.0-openjdk-amd64[C[C[C[C[C[C[C[C[C[C[C[C[C[Cjava -version[Kexit[Ksystemctl status nginx[2Plist-unitsstatus nginx[1@disable[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@udo s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pystemctl status[C[C[C[C[C[C[3Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pystemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ksystemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service
+[?2004l[?2004h[?1049h[22;0;0t[1;49r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[47;40H(B[0;7m[ Reading... ](B[m[47;39H(B[0;7m[ Read 30 lines ](B[m[H(B[0;7m  GNU nano 7.2                 /usr/lib/systemd/user/nginx2.service                          [1;92H(B[m[48d(B[0;7m^G(B[m Help[48;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut[48;61H(B[0;7m^T(B[m Execute     (B[0;7m^C(B[m Location[49d(B[0;7m^X(B[m Exit[49;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Paste[61G(B[0;7m^J(B[m Justify     (B[0;7m^/(B[m Go To Line[2d[36m# Stop dance for nginx[3d# =======================[4d#[5d# ExecStop sends SIGQUIT (graceful stop) to the nginx process.[6d# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[7d# and sends SIGTERM (fast shutdown) to the main process.[8d# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[9d# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[10d#[11d# nginx signals reference doc:[12d# http://nginx.org/en/docs/control.html[13d#[14d(B[0;1m[32m[Unit][15d[39m(B[mDescription=New high performance web server and a reverse proxy server[16dDocumentation=man:nginx(8)[17dAfter=network-online.target remote-fs.target nss-lookup.target[18dWants=network-online.target[20d(B[0;1m[32m[Service][21d[39m(B[mType=forking[22dPIDFile=/run/nginx.pid[23dExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[24dExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[25dExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[26dExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[27dTimeoutStopSec=5[28dKillMode=mixed[30d(B[0;1m[32m[Install][31d[39m(B[mWantedBy=multi-user.target[2d[?12l[?25h[?25l[1;69H(B[0;7m*[92G(B[m7[2;46r8[2dM[1;49r[3;1H[?12l[?25h[?25l[?12l[?25h[A[?25l[36m# /usr/lib/systemd/system/nginx.service[47d[39m(B[m[K[2;40H[?12l[?25h[?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[?12l[?25h [?25l[36m/usr/lib/systemd/user/nginx2.service[39m(B[m[?12l[?25h[?25l[47d(B[0;7mSave modified buffer?                                                                        [48;1H Y(B[m Yes[K[49d(B[0;7m N(B[m No  [49;16H (B[0;7m^C(B[m Cancel[K[47;23H[?12l[?25h[?25l[48d(B[0;7m^G(B[m Help[48;24H(B[0;7mM-D(B[m DOS Format[48;47H(B[0;7mM-A(B[m Append[48;70H(B[0;7mM-B(B[m Backup File[49d(B[0;7m^C(B[m Cancel[17G       (B[0;7mM-M(B[m Mac Format[49;47H(B[0;7mM-P(B[m Prepend[49;70H(B[0;7m^T(B[m Browse[47d(B[0;7mFile Name to Write: /usr/lib/systemd/user/nginx2.service(B[m[?12l[?25h[?25l[47;39H[1K (B[0;7m[ Writing... ](B[m[K[1;69H(B[0;7m [92G(B[m[47;38H(B[0;7m[ Wrote 31 lines ](B[m[J[49d[?12l[?25h[49;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;user@less4: ~user@less4:~$ sudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pystemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pystemctl daemon-reload 
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ sudo [K[K[K[K[K[7msudo cp /usr/lib/systemd/user/nginx2.service /usr/lib/systemd/system/nginx2.ser[27m[7mv[27m[7mice [27m
+[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo cp /usr/lib/systemd/user/nginx2.service /usr/lib/systemd/system/nginx2.service
+[A
+[?2004l[?2004h]0;user@less4: ~user@less4:~$ sudo cp /usr/lib/systemd/user/nginx2.service /usr/lib/systemd/system/nginx2.service[A]0;user@less4: ~user@less4:~$ [Cystemctl daemon-reload [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ systemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo cp /usr/lib/systemd/user/nginx2.service /usr/lib/systemd/system/nginx2.service[A]0;user@less4: ~user@less4:~$ [Cystemctl daemon-reload [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pystemctl daemon-reload [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cudo nano /usr/lib/systemd/user/nginx2.service[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Pystemctl cat nginx2
+[?2004l[?1h=[0;1;34m# ]8;;file://less4/usr/lib/systemd/system/nginx2.service/usr/lib/systemd/system/nginx2.service]8;;[0m[m
+[0;1;38;5;245m# /usr/lib/systemd/user/nginx2.service[0m[m
+[0;1;38;5;245m# Stop dance for nginx[0m[m
+[0;1;38;5;245m# =======================[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;38;5;245m# ExecStop sends SIGQUIT (graceful stop) to the nginx process.[0m[m
+[0;1;38;5;245m# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control[0m[m
+[0;1;38;5;245m# and sends SIGTERM (fast shutdown) to the main process.[0m[m
+[0;1;38;5;245m# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends[0m[m
+[0;1;38;5;245m# SIGKILL to all the remaining processes in the process group (KillMode=mixed).[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;38;5;245m# nginx signals reference doc:[0m[m
+[0;1;38;5;245m# http://nginx.org/en/docs/control.html[0m[m
+[0;1;38;5;245m#[0m[m
+[0;1;36m[Unit][0m[m
+Description=New high performance web server and a reverse proxy server[m
+Documentation=man:nginx(8)[m
+After=network-online.target remote-fs.target nss-lookup.target[m
+Wants=network-online.target[m
+[0;1;38;5;245m[0m[m
+[0;1;36m[Service][0m[m
+Type=forking[m
+PIDFile=/run/nginx.pid[m
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'[m
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'[m
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload[m
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid[m
+TimeoutStopSec=5[m
+KillMode=mixed[m
+[0;1;38;5;245m[0m[m
+[0;1;36m[Install][0m[m
+WantedBy=multi-user.target[m
+[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ systemctl cat nginx2[1P nginx2[1P nginx2[1P nginx2e nginx2n nginx2a nginx2b nginx2l nginx2e nginx2[C nginx2
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-unit-files ====
+[0mAuthentication is required to manage system service or unit files.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0mCreated symlink /etc/systemd/system/multi-user.target.wants/nginx2.service → /usr/lib/systemd/system/nginx2.service.
+[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.reload-daemon ====
+[0mAuthentication is required to reload the systemd state.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ systemctl enable  nginx2[1P[C[1Pnginx2[1P nginx2[1P nginx2[1P nginx2[1P nginx2[1P nginx2s nginx2t nginx2a nginx2r nginx2t nginx2
+[?2004l[1;31m==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ====
+[0mAuthentication is required to start 'nginx2.service'.
+Authenticating as: user
+Password: 
+[1;31m==== AUTHENTICATION COMPLETE ====
+[0m[?2004h]0;user@less4: ~user@less4:~$ systemctl start nginx2[1P nginx2[1P nginx2[1P nginx2[1P nginx2[1P nginx2s nginx2t nginx2a nginx2t nginx2u nginx2s nginx2
+[?2004l[?1h=[0;1;32m●[0m nginx2.service - New high performance web server and a reverse proxy server[m
+     Loaded: loaded (]8;;file://less4/usr/lib/systemd/system/nginx2.service/usr/lib/systemd/system/nginx2.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)[m
+     Active: [0;1;32mactive (running)[0m since Tue 2025-01-14 17:01:32 UTC; 8s ago[m
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;[m
+    Process: 5679 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=[m[7m>[27m
+    Process: 5680 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, s[m[7m>[27m
+   Main PID: 5682 (nginx)[m
+      Tasks: 3 (limit: 4556)[m
+     Memory: 2.4M (peak: 2.5M)[m
+        CPU: 59ms[m
+     CGroup: /system.slice/nginx2.service[m
+             ├─[0;38;5;245m5682 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[0m[m
+             ├─[0;38;5;245m5683 "nginx: worker process"[0m[m
+             └─[0;38;5;245m5684 "nginx: worker process"[0m[m
+[m
+Jan 14 17:01:32 less4 systemd[1]: Starting nginx2.service - New high performance web server [m[7m>[27m
+Jan 14 17:01:32 less4 systemd[1]: Started nginx2.service - New high performance web server a[m[7m>[27m
+[7mlines 1-17/17 (END)[27m[K[K[?1l>[?2004h]0;user@less4: ~user@less4:~$ exit
+[?2004lexit
+
+Script done on 2025-01-14 17:01:46+00:00 [COMMAND_EXIT_CODE="0"]
