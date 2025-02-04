@@ -1,0 +1,52 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+	# global provision
+	#config.vm.provision "shell", inline: "echo A"
+	#
+	# server part
+	config.vm.define "server" do |srv|
+		srv.vm.box = "alpine64"
+		srv.vm.box_check_update = false
+		srv.vm.hostname = "server"	
+		srv.vm.network "public_network", ip: "172.17.0.22", bridge: "Realtek PCIe GbE Family Controller"
+#		srv.vm.define "testing"
+		srv.vm.provider "virtualbox" do |vbs|
+			vbs.gui = false
+			vbs.memory = "256" 
+		end
+		#srv.vm.provision "shell", path: "./scripts/server.sh"
+	end	
+	# client part
+	config.vm.define "client" do |client|
+		client.vm.box = "alpine64"
+		client.vm.box_check_update = false
+		client.vm.hostname = "client"
+		client.vm.network "public_network", ip: "172.17.0.21", bridge: "Realtek PCIe GbE Family Controller"
+#		client.vm.define "testing"
+		client.vm.provider "virtualbox" do |vbc|
+			vbc.gui = false
+			vbc.memory = "256" 
+		end
+		
+		
+		# single command trigger
+#		client.trigger.after :up do |trigger|
+#		  trigger.info = "Running a before trigger!"
+#		  trigger.ignore = [:destroy, :halt]
+#		end
+		# copy server private_key
+		client.vm.provision "file", 
+			source: "C:/vagrant/multyvag/.vagrant/machines/server/virtualbox/private_key", 
+			destination: "/tmp/vagprivatekey"
+		# use server private_key	
+		client.vm.provision "shell", path: "./scripts/client.sh", privileged: false
+	end
+#	config.vm.provision "shell", inline: "host_vagrant_ssh.sh"
+#	config.vm.provision :shell, path: "./scripts/host_vagrant_ssh.sh", privileged: "false"
+end
