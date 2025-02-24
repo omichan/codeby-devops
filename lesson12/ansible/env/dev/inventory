@@ -1,0 +1,5 @@
+[dev]
+192.168.1.21 ansible_ssh_private_key_file=~/.ssh/devkey
+
+[dev:vars]
+envvar=dev
