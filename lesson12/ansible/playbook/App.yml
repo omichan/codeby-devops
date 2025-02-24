@@ -1,0 +1,48 @@
+---
+
+- name: Network Getting Started First Playbook
+  hosts: all
+  remote_user: "vagrant"
+  become: true
+  #gather_facts: false
+  
+  tasks:
+    - name: Install nginx
+      apt:
+        name:
+          - htop
+          - wget
+          - nginx
+        state: latest
+        update_cache: yes
+        
+    - name: Remove default nginx configuration
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+    
+    - name: Add nginx configuration
+      copy:
+        src: /home/user/ansib12/env/dev/def-site-config
+        dest: /etc/nginx/sites-available/
+        owner: "{{ user }}"
+        group: root
+        mode: '0644'
+        
+    - name: Enable website configuration
+      file:
+        src: /etc/nginx/sites-available/def-site-config
+        dest: /etc/nginx/sites-enabled/def-site-config
+        state: link
+
+    - name: Ensure nginx is running
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+           
+    - name: print created env
+      debug:
+        msg: "This host is in {{ envvar }} environment"
+  vars:
+    user: "vagrant"
