@@ -1,0 +1,11 @@
+---
+    
+- name: Install Wordpress on all hosts
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  roles:
+    - wordpress
+  vars_files:
+    - /home/test/ansi/roles/mysql/vars/main.yml

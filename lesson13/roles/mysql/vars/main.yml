@@ -1,0 +1,11 @@
+---
+
+mysql_rpm_key: http://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+mysql_rpm_url: http://repo.mysql.com/mysql57-community-release-el7-10.noarch.rpm
+mysql_log_path: /var/log/mysqld.log
+mysql_root_login: root
+mysql_root_pass: j/ip{,uf7/oT
+
+mysql_wp_db: "db_wordpress"
+mysql_user_login: "cdbu"
+mysql_user_pass: "cdbuPa$$"

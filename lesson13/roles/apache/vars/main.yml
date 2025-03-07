@@ -1,0 +1,8 @@
+---
+
+apache_repo_url: http://rpms.famillecollet.com/enterprise/remi-release-7.rpm 
+apache_rpm_name: /root/remi-release-7.rpm
+apache_rpm_ver: remi-php81
+
+apache_ppa_name: ondrej/php
+php_mod_ver: php8.1

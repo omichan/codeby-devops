@@ -1,0 +1,9 @@
+---
+#
+- name: Install MySQL on all hosts
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  roles:
+    - mysql

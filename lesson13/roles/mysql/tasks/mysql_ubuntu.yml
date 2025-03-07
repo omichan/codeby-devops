@@ -1,0 +1,37 @@
+---
+
+- name: Installing Mysql  and dependencies
+  package:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  loop:
+    - mysql-server
+    - mysql-client 
+    - python3-mysqldb
+    - libmysqlclient-dev
+  become: yes
+ 
+- name: start and enable mysql service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+    
+- name: Creating mysql user
+  mysql_user:
+    name: "{{ mysql_user_login }}"
+    password: "{{ mysql_user_pass }}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+    
+- name: Creating db_
+  mysql_db:
+    name: "{{ mysql_wp_db }}"
+    state: present
+    
+- name: Restart mysql
+  service:
+    name: mysql
+    state: restarted

@@ -1,0 +1,27 @@
+---
+
+- name: Print the gateway for each host when defined
+  ansible.builtin.debug:
+    msg: System {{ mysql_root_pass }}
+    
+- name: Download Wordpress
+  ansible.builtin.get_url:
+    url: "{{ wp_repo_url }}"
+    dest: "{{ wp_untar_path }}"
+    mode: '0755'
+    
+    
+- name: Extract Wordpress
+  ansible.builtin.unarchive:
+    src: "{{ wp_untar_path }}"
+    dest: "{{ wp_apache_path }}"
+    remote_src: yes
+    
+    
+#- include_vars: "{{ roles_path }}/mysql/vars/main.yml"
+
+
+- name: Service zookeeper | Create systemd script
+  template:
+    src: "{{ wp_conf_c }}"
+    dest: "{{ wp_apache_path }}/wordpress/wp-config.php"
