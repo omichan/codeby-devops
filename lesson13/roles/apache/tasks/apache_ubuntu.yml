@@ -1,0 +1,37 @@
+---
+# Task for Ubuntu
+   
+- name: install apache2
+  apt:
+    name: apache2
+    update_cache: yes
+    state: latest
+    
+- name: Add PPA for PHP
+  apt_repository:
+    repo: ppa:{{ apache_ppa_name }}
+    state: present
+    update_cache: yes   
+
+- name: Install PHP and related modules
+  apt:
+    name:
+      - "{{ php_mod_ver }}"
+      - "libapache2-mod-{{ php_mod_ver }}"
+      - "{{ php_mod_ver }}-cli"
+      - "{{ php_mod_ver }}-mysql"
+      - "{{ php_mod_ver }}-xml"
+      - "{{ php_mod_ver }}-mbstring"
+      - "{{ php_mod_ver }}-curl"
+    state: present
+  
+- name: Enable Apache PHP module
+  shell: a2enmod {{ php_mod_ver }}
+
+- name: Restart Apache to apply PHP
+  service:
+    name: apache2
+    state: restarted
+    
+
+

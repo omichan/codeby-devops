@@ -1,0 +1,9 @@
+---
+
+- name: Install the web server for RHEL
+  ansible.builtin.import_tasks: apache_centos.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+  
+- name: Install the web server for Debian
+  ansible.builtin.import_tasks: apache_ubuntu.yml
+  when: ansible_facts['os_family']|lower == 'debian'

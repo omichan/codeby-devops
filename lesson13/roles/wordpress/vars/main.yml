@@ -1,0 +1,9 @@
+---
+
+
+wp_repo_url: http://wordpress.org/latest.tar.gz
+wp_untar_path: /tmp/latest.tar.gz
+wp_apache_path: /var/www/html
+
+wp_conf_u: ubuntu_wp-config.php.j2
+wp_conf_c: centos_wp-config.php.j2

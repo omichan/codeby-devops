@@ -1,0 +1,63 @@
+---
+# Task for CentOS
+
+- name: Install Packages
+  yum:
+    name:
+    - httpd
+    - firewalld
+    state: present
+    
+- name: enable firewalld for httpd
+  command: firewall-cmd --permanent --add-service=http
+
+- name: reload firewalld
+  command: firewall-cmd --reload 
+ 
+- name: Start apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+    
+- name: yum install epel
+  yum: 
+    name:
+      - epel-release.noarch 
+    state: latest
+
+- name: download remi repo rpm
+  get_url: 
+    url: "{{ apache_repo_url }}"
+    dest: /root/  
+
+- name: install remi repo rpm
+  yum: 
+    name: "{{ apache_rpm_name }}"
+    state: present
+
+- name: install php
+  yum: 
+    name:
+      - php-mssql
+      - php-pear
+      - php
+      - php-pdo
+      - php-pecl-redis
+      - php-xml
+      - php-pecl-zip
+      - php-pecl-jsonc
+      - php-pecl-igbinary
+      - httpd,httpd-tools
+      - php-mbstring
+      - php-cli
+      - php-common 
+      - php-mysqli
+    enablerepo: remi,{{ apache_rpm_ver }}
+    state: latest
+    
+- name: Restart apache
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes

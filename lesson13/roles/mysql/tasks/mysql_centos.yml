@@ -1,0 +1,64 @@
+---
+- name: Import a key from a url
+  ansible.builtin.rpm_key:
+    key: "{{ mysql_rpm_key }}"
+    state: present
+
+- name: Setup repo for Mysql
+  yum:
+    name: "{{ mysql_rpm_url }}"
+    state: present
+        
+        
+- name: Install Packages
+  yum:
+    name:
+    - mysql-community-server
+    - MySQL-python
+    state: present
+    
+- name: Start Mysql
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+    
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  
+- name: Check if file exists
+  stat:
+    path: /root/.my.cnf
+  register: result
+   
+- name: Get temporary root password from log
+  command: "sudo grep 'temporary password' {{ mysql_log_path }}"
+  register: temp_root_password
+  when: not result.stat.exists
+    
+- name: Extract the temporary password using regex
+  set_fact:
+    temp_password: "{{ (temp_root_password.stdout | regex_search('generated for root@localhost: (.+)', '\\1'))[0] }}"
+  when: not result.stat.exists
+
+- name: Create the MySQL (/root/.my.cnf) config file
+  copy:
+    dest: /root/.my.cnf
+    content: |
+      [client]
+      user=root
+      password={{ mysql_root_pass }}
+  when: not result.stat.exists
+    
+- name: Update MySQL root Password
+  shell: |
+    mysql -u root -p"{{ temp_password }}" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_root_pass }}';"
+  when: not result.stat.exists
+    
+- name: Create MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_wp_db }}"
+    state: present
+
+    
