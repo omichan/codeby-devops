@@ -20,9 +20,6 @@ resource "yandex_compute_instance" "vm-pub" {
   }
 
   network_interface {
-    subnet_id = [
-	  for sub in data.yandex_vpc_subnet.ext-subnets: #if data.yandex_vpc_subnet.ext-subnets[sub].zone == var.cloud_zone:
-	    sub.zone == var.cloud_zone ? sub.subnet_id : null
-	][0]
+    subnet_id = var.subnet_id
   }
 }

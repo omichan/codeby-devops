@@ -14,6 +14,6 @@ output "subnet-print" {
   ]
 }
 
-output "subnet-info" {
+output "zone_subnets" {
   value = data.yandex_vpc_subnet.ext-subnets
 }

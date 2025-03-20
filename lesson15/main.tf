@@ -18,10 +18,14 @@ module "subnet-info" {
 }
 
 # create vm by Zone
-module "subnet-info" {
+module "create-vm" {
   source = "./modules/create-vm"
   cloud_id = var.vpc_id
   cloud_zone = var.zone	
+  subnet_id = [
+	for sub in module.subnet-info.zone_subnets:
+	  sub.zone == var.zone ? sub.subnet_id : null
+  ][0]
 }
 
 
