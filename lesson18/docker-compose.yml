@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - vol_db:/var/lib/mysql
+    env_file: .env
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - backend  
+  app:
+    image: wordpress:latest
+    env_file: .env
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+    volumes:
+      - vol_app:/var/www/html 
+    networks:
+      - backend  
+    depends_on:
+      - db
+  proxy:
+    image: nginx:1.15.12-alpine
+    volumes:
+      - vol_app:/var/www/html
+      - ./vol_prx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    networks:
+      - frontend  
+      - backend  
+    depends_on:
+      - app
+      
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+      
+volumes:
+  vol_app:
+  vol_db:
+  vol_prx:
