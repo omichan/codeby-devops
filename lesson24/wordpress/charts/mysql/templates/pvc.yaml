@@ -1,0 +1,15 @@
+{{- if .Values.StatesfulCfgWP.PVenabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mysql.name" . }}-pvc
+spec:
+  accessModes:
+    - {{ .Values.StatesfulCfgWP.pvcMode }} 
+  resources:
+    requests:
+      storage: {{ .Values.StatesfulCfgWP.pvcSize | quote }}
+  selector:
+    matchLabels:
+      app: {{ include "mysql.name" . }}
+{{- end }}

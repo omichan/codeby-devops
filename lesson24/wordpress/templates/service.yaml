@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wordpress.name" . }}-svc
+spec:
+  type: {{ .Values.DeployCfgWP.svcType }}
+  ports:
+    - port: {{ .Values.DeployCfgWP.svcPort }}
+      targetPort: {{ .Values.DeployCfgWP.svcTargPort }}
+      protocol: TCP
+      name: http
+      nodePort: {{ .Values.DeployCfgWP.svcNodePort }}
+  selector:
+    {{- include "wordpress.AppName" . | nindent 4 }}

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wordpress.name" . }}
+  labels:
+    {{- include "wordpress.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "wp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "wordpress.AppName" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.DeployCfgWP.imagetag | default .Chart.AppVersion }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.DeployCfgWP.port }}
+              protocol: TCP
+          {{- if .Values.DeployCfgWP.PVenabled }}  
+          volumeMounts:
+            - name: {{ include "wordpress.name" . }}-store
+              mountPath: {{ .Values.DeployCfgWP.mountPath }}"
+          {{- end }}
+          {{- if .Values.DeployCfgWP.PVenabled }}            
+          resources:
+            {{- toYaml .Values.DeployCfgWP.resources | nindent 12 }}          
+          envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-wpcfm
+          env:
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secretParams.secRefName }}
+                key: {{ .Values.secretParams.secRefKey }}
+      volumes:
+        - name: {{ include "wordpress.name" . }}-store
+          persistentVolumeClaim:
+            claimName: {{ include "wordpress.name" . }}-pvc
+      {{- end }}

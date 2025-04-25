@@ -1,0 +1,22 @@
+user@user-srv:~/less24$ kubectl get all
+NAME                      READY   STATUS    RESTARTS   AGE
+pod/diag-pod              1/1     Running   0          6s
+pod/sql-0                 1/1     Running   0          112s
+pod/wp-8678784758-67lls   1/1     Running   0          112s
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        36m
+service/sql-svc      ClusterIP   10.99.123.184    <none>        3306/TCP       112s
+service/wp-svc       NodePort    10.107.191.100   <none>        80:31180/TCP   112s
+
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/wp   1/1     1            1           112s
+
+NAME                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/wp-8678784758   1         1         1       112s
+
+NAME                   READY   AGE
+statefulset.apps/sql   1/1     112s
+
+NAME                                         REFERENCE       TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/wp-hpa   Deployment/wp   cpu: 1%/50%   1         3         1          112s
