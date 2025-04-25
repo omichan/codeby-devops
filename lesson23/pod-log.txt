@@ -1,0 +1,7 @@
+root@diag-pod:/# kubectl get pods
+NAME                         READY   STATUS    RESTARTS   AGE
+diag-pod                     1/1     Running   0          48s
+mysql-0                      1/1     Running   0          104s
+wordpress-65c5f45b59-c6fmc   1/1     Running   0          104s
+root@diag-pod:/# kubectl get pods -n default
+Error from server (Forbidden): pods is forbidden: User "system:serviceaccount:dev:cdb-serviceaccount" cannot list resource "pods" in API group "" in the namespace "default"
