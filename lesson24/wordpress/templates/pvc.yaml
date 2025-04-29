@@ -1,0 +1,15 @@
+{{- if .Values.DeployCfgWP.PVenabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "wordpress.name" . }}-pvc
+spec:
+  accessModes:
+    - {{ .Values.DeployCfgWP.pvcMode }} 
+  resources:
+    requests:
+      storage: {{ .Values.DeployCfgWP.pvcSize | quote }}
+  selector:
+    matchLabels:
+      app: {{ include "wordpress.name" . }}
+{{- end }}

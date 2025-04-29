@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "mysql.name" . }}
+  labels:
+    {{- include "mysql.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "mysql.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "mysql.name" . }}-svc2
+  replicas: {{ .Values.replicaCount }}  
+  template:
+    metadata:
+      labels:
+        {{- include "mysql.selectorLabels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.StatesfulCfgWP.tGPS }}
+      containers:
+      - name: {{ include "mysql.fullname" . }}-pod
+        image: {{ .Values.StatesfulCfgWP.imagetag }}
+        ports:
+        - containerPort: {{ .Values.StatesfulCfgWP.containerPort }}
+        {{- if .Values.StatesfulCfgWP.PVenabled }}
+        volumeMounts:
+        - name: wp-store
+          mountPath: {{ .Values.StatesfulCfgWP.mountPath }}
+        {{- end }}
+        {{- if .Values.StatesfulCfgWP.PVenabled }}
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secretParams.secRefName }}
+                key: {{ .Values.secretParams.secRefKey }}
+      volumes:
+        - name: wp-store
+          persistentVolumeClaim:
+            claimName: {{ include "mysql.name" . }}-pvc
+      {{- end }}

@@ -1,0 +1,24 @@
+{{- if .Values.DeployCfgWP.PVenabled -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "wordpress.name" . }}-pv
+spec:
+  capacity:
+    storage: {{ .Values.DeployCfgWP.pvcSize }}
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .Values.StorageClass.accessModes | quote }}
+  persistentVolumeReclaimPolicy: {{ .Values.StorageClass.reclaimPolicy | quote }}
+  storageClassName: {{ include "wordpress.name" . }}-store
+  local:
+    path: {{ .Values.DeployCfgWP.pvPath }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node   
+{{ end -}}
