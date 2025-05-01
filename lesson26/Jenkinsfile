@@ -6,7 +6,7 @@ pipeline {
         ProjDir3 = 'Hello World'
     }
     stages { 
-        stage(“Compile & Build Binary”) { 
+        stage("Compile & Build Binary") { 
             parallel {
                 dir("${env.ProjDir1}") { 
 					stage('Build') {
