@@ -1,0 +1,80 @@
+pipeline { 
+    agent any 
+	environment {
+        ProjDir1 = 'Hello Devops'
+		ProjDir2 = 'Hello Jenkins'
+        ProjDir3 = 'Hello World'
+    }
+    stages { 
+        stage(“Compile & Build Binary”) { 
+            parallel {
+                dir("${env.ProjDir1}") { 
+					stage('Build') {
+						steps {
+							sh 'mvn -B -DskipTests clean package'
+						}
+					}
+					stage('Test') {
+						steps {
+							sh 'mvn test'
+						}
+						post {
+							always {
+								junit 'target/surefire-reports/*.xml'
+							}
+						}
+					}
+					stage('Deliver') { 
+						steps {
+							sh './jenkins/scripts/deliver.sh' 
+						}
+					}
+                }
+                dir("${env.ProjDir2}") { 
+					stage('Build') {
+						steps {
+							sh 'mvn -B -DskipTests clean package'
+						}
+					}
+					stage('Test') {
+						steps {
+							sh 'mvn test'
+						}
+						post {
+							always {
+								junit 'target/surefire-reports/*.xml'
+							}
+						}
+					}
+					stage('Deliver') { 
+						steps {
+							sh './jenkins/scripts/deliver.sh' 
+						}
+					}
+                }
+				dir("${env.ProjDir1}") { 
+					stage('Build') {
+						steps {
+							sh 'mvn -B -DskipTests clean package'
+						}
+					}
+					stage('Test') {
+						steps {
+							sh 'mvn test'
+						}
+						post {
+							always {
+								junit 'target/surefire-reports/*.xml'
+							}
+						}
+					}
+					stage('Deliver') { 
+						steps {
+							sh './jenkins/scripts/deliver.sh' 
+						}
+					}
+                }
+            } 
+        } 
+    } 
+}
