@@ -3,9 +3,14 @@ pipeline {
 			label 'maven'
 		}
 	tools {
-    maven 'maven'
+    	maven 'maven'
+		jdk "JDK17"
 	}
 	environment {
+        ProjName1 = 'Hello Devops'
+		ProjName2 = 'Hello Jenkins'
+        ProjName3 = 'Hello World'		
+		projPath = 'lesson26/'
         ProjDir1 = 'lesson26/Hello Devops'
 		ProjDir2 = 'lesson26/Hello Jenkins'
         ProjDir3 = 'lesson26/Hello World'
@@ -13,7 +18,7 @@ pipeline {
     stages { 
         stage("Compile & Build Binary") { 
 			parallel {
-				stage('stage project-a') {
+				stage('stage project ${env.ProjName1}') {
 					stages {
 						stage('Build') {
 							steps {
@@ -36,12 +41,14 @@ pipeline {
 						}
 						stage('Deliver') { 
 							steps {
-								sh './jenkins/scripts/deliver.sh' 
+								dir("${env.ProjDir1}") { 
+									sh './jenkins/scripts/deliver.sh' 
+								}
 							}
 						}
 					}
 				}
-				stage('stage project-b') {
+				stage('stage project ${env.ProjName2}') {
 					stages {
 						stage('Build') {
 							steps {
@@ -52,7 +59,9 @@ pipeline {
 						}
 						stage('Test') {
 							steps {
-								sh 'mvn test'
+								dir("${env.ProjDir2}") {
+									sh 'mvn test'
+								}
 							}
 							post {
 								always {
@@ -62,23 +71,27 @@ pipeline {
 						}
 						stage('Deliver') { 
 							steps {
-								sh './jenkins/scripts/deliver.sh' 
+								dir("${env.ProjDir2}") { 
+									sh './jenkins/scripts/deliver.sh' 
+								}
 							}
 						}
 					}
 				}
-				stage('stage project-c') {
+				stage('stage project ${env.ProjName3}') {
 					stages {
 						stage('Build') {
 							steps {
-								dir("${env.ProjDir1}") { 
+								dir("${env.ProjDir3}") { 
 									sh 'mvn -B -DskipTests clean package'
 								}
 							}
 						}
 						stage('Test') {
 							steps {
-								sh 'mvn test'
+								dir("${env.ProjDir3}") {
+									sh 'mvn test'
+								}
 							}
 							post {
 								always {
@@ -88,7 +101,9 @@ pipeline {
 						}
 						stage('Deliver') { 
 							steps {
-								sh './jenkins/scripts/deliver.sh' 
+								dir("${env.ProjDir3}") { 
+									sh './jenkins/scripts/deliver.sh' 
+								}
 							}
 						}
 					}
