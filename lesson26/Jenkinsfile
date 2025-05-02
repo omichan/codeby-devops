@@ -7,73 +7,79 @@ pipeline {
     }
     stages { 
         stage("Compile & Build Binary") { 
-            parallel {
-                dir("${env.ProjDir1}") { 
-					stage('Build') {
-						steps {
-							sh 'mvn -B -DskipTests clean package'
+			parallel {
+				stage('stage project-a') {
+					dir("${env.ProjDir1}") { 
+						stage('Build') {
+							steps {
+								sh 'mvn -B -DskipTests clean package'
+							}
 						}
-					}
-					stage('Test') {
-						steps {
-							sh 'mvn test'
+						stage('Test') {
+							steps {
+								sh 'mvn test'
+							}
+							post {
+								always {
+									junit 'target/surefire-reports/*.xml'
+								}
+							}
 						}
-						post {
-							always {
-								junit 'target/surefire-reports/*.xml'
+						stage('Deliver') { 
+							steps {
+								sh './jenkins/scripts/deliver.sh' 
 							}
 						}
 					}
-					stage('Deliver') { 
-						steps {
-							sh './jenkins/scripts/deliver.sh' 
+				}
+				stage('stage project-b') {
+					dir("${env.ProjDir2}") { 
+						stage('Build') {
+							steps {
+								sh 'mvn -B -DskipTests clean package'
+							}
 						}
-					}
-                }
-                dir("${env.ProjDir2}") { 
-					stage('Build') {
-						steps {
-							sh 'mvn -B -DskipTests clean package'
+						stage('Test') {
+							steps {
+								sh 'mvn test'
+							}
+							post {
+								always {
+									junit 'target/surefire-reports/*.xml'
+								}
+							}
 						}
-					}
-					stage('Test') {
-						steps {
-							sh 'mvn test'
-						}
-						post {
-							always {
-								junit 'target/surefire-reports/*.xml'
+						stage('Deliver') { 
+							steps {
+								sh './jenkins/scripts/deliver.sh' 
 							}
 						}
 					}
-					stage('Deliver') { 
-						steps {
-							sh './jenkins/scripts/deliver.sh' 
+				}
+				stage('stage project-c') {
+					dir("${env.ProjDir1}") { 
+						stage('Build') {
+							steps {
+								sh 'mvn -B -DskipTests clean package'
+							}
 						}
-					}
-                }
-				dir("${env.ProjDir1}") { 
-					stage('Build') {
-						steps {
-							sh 'mvn -B -DskipTests clean package'
+						stage('Test') {
+							steps {
+								sh 'mvn test'
+							}
+							post {
+								always {
+									junit 'target/surefire-reports/*.xml'
+								}
+							}
 						}
-					}
-					stage('Test') {
-						steps {
-							sh 'mvn test'
-						}
-						post {
-							always {
-								junit 'target/surefire-reports/*.xml'
+						stage('Deliver') { 
+							steps {
+								sh './jenkins/scripts/deliver.sh' 
 							}
 						}
 					}
-					stage('Deliver') { 
-						steps {
-							sh './jenkins/scripts/deliver.sh' 
-						}
-					}
-                }
+				}
             } 
         } 
     } 
