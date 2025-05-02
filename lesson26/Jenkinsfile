@@ -1,11 +1,30 @@
-def runStage() {
+def runStage1() {
    CHANGE_SET = sh (
       script: 'git log -1 --name-only --oneline --pretty="format:"',
       returnStdout: true
    ).trim()
    echo "Current changeset: ${CHANGE_SET}"
-   return (CHANGE_SET ==~ "(.*)lesson26/Hello Devops/(.*)|(.*)lesson26/Hello Jenkins/(.*)|(.*)lesson26/Hello World/(.*)")
+   return (CHANGE_SET ==~ "(.*)lesson26/Hello Devops/(.*)")
 }
+
+def runStage2() {
+   CHANGE_SET = sh (
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
+      returnStdout: true
+   ).trim()
+   echo "Current changeset: ${CHANGE_SET}"
+   return (CHANGE_SET ==~ "(.*)lesson26/Hello Jenkins/(.*)")
+}
+
+def runStage3() {
+   CHANGE_SET = sh (
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
+      returnStdout: true
+   ).trim()
+   echo "Current changeset: ${CHANGE_SET}"
+   return (CHANGE_SET ==~ "(.*)lesson26/Hello World/(.*)")
+}
+
 
 pipeline { 
 	agent {
@@ -31,7 +50,7 @@ pipeline {
 					stages {
 						stage('Build') {
 							when { 
-								expression { runStage().contains('Hello Devops') }
+								expression { runStage1() }
 							}
 							steps {
 								dir("${env.ProjDir1}") { 
@@ -41,7 +60,7 @@ pipeline {
 						}
 						stage('Test') {
 							when { 
-								expression { runStage().contains('Hello Devops') }
+								expression { runStage1() }
 							}
 							steps {
 								dir("${env.ProjDir1}") { 
@@ -58,7 +77,7 @@ pipeline {
 						}
 						stage('Deliver') { 
 							when { 
-								expression { runStage().contains('Hello Devops') }
+								expression { runStage1() }
 							}
 							steps {
 								dir("${env.ProjDir1}") { 
@@ -73,7 +92,7 @@ pipeline {
 					stages {
 						stage('Build') {
 							when { 
-								expression { runStage().contains('Hello Jenkins') }
+								expression { runStage2() }
 							}
 							steps {
 								dir("${env.ProjDir2}") { 
@@ -83,7 +102,7 @@ pipeline {
 						}
 						stage('Test') {
 							when { 
-								expression { runStage().contains('Hello Jenkins') }
+								expression { runStage2() }
 							}
 							steps {
 								dir("${env.ProjDir2}") {
@@ -100,7 +119,7 @@ pipeline {
 						}
 						stage('Deliver') { 
 							when { 
-								expression { runStage().contains('Hello Jenkins') }
+								expression { runStage2() }
 							}
 							steps {
 								dir("${env.ProjDir2}") { 
@@ -115,7 +134,7 @@ pipeline {
 					stages {
 						stage('Build') {
 							when { 
-								expression { runStage().contains('Hello World') }
+								expression { runStage3() }
 							}
 							steps {
 								dir("${env.ProjDir3}") { 
@@ -125,7 +144,7 @@ pipeline {
 						}
 						stage('Test') {
 							when { 
-								expression { runStage().contains('Hello World') }
+								expression { runStage3() }
 							}
 							steps {
 								dir("${env.ProjDir3}") {
@@ -142,7 +161,7 @@ pipeline {
 						}
 						stage('Deliver') { 
 							when { 
-								expression { runStage().contains('Hello World') }
+								expression { runStage3() }
 							}
 							steps {
 								dir("${env.ProjDir3}") { 
