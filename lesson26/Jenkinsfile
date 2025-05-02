@@ -29,7 +29,7 @@ pipeline {
 			parallel {
 				stage('stage project 1') {
 					when { 
-      					expression { runStage().contains('${env.ProjName1}') }
+      					expression { runStage().contains('Hello Devops') }
    					}
 					stages {
 						stage('Build') {
@@ -64,6 +64,9 @@ pipeline {
 					}
 				}
 				stage('stage project 2') {
+					when { 
+      					expression { runStage().contains('Hello Jenkins') }
+   					}
 					stages {
 						stage('Build') {
 							steps {
@@ -98,6 +101,9 @@ pipeline {
 				}
 				stage('stage project 3') {
 					stages {
+						when { 
+      						expression { runStage().contains('Hello World') }
+   						}
 						stage('Build') {
 							steps {
 								dir("${env.ProjDir3}") { 
