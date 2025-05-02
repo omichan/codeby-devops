@@ -3,7 +3,7 @@ pipeline {
 			label 'maven'
 		}
 	tools {
-    maven 'maven-3.9.9'
+    maven 'maven'
 	}
 	environment {
         ProjDir1 = 'lesson26/Hello Devops'
