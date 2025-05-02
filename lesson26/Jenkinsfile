@@ -29,20 +29,20 @@ pipeline {
 			parallel {
 				stage('stage project 1') {
 					stages {
-						when { 
-							expression { runStage().contains('Hello Devops') }
-						}
 						stage('Build') {
+							when { 
+								expression { runStage().contains('Hello Devops') }
+							}
 							steps {
 								dir("${env.ProjDir1}") { 
 									sh 'mvn -B -DskipTests clean package'
 								}
 							}
 						}
-						when { 
-							expression { runStage().contains('Hello Devops') }
-						}
 						stage('Test') {
+							when { 
+								expression { runStage().contains('Hello Devops') }
+							}
 							steps {
 								dir("${env.ProjDir1}") { 
 									sh 'mvn test'
@@ -56,10 +56,10 @@ pipeline {
 								}
 							}
 						}
-						when { 
-							expression { runStage().contains('Hello Devops') }
-						}
 						stage('Deliver') { 
+							when { 
+								expression { runStage().contains('Hello Devops') }
+							}
 							steps {
 								dir("${env.ProjDir1}") { 
 									//sh './jenkins/scripts/deliver.sh' 
