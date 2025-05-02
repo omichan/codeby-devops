@@ -9,10 +9,12 @@ pipeline {
         stage("Compile & Build Binary") { 
 			parallel {
 				stage('stage project-a') {
-					dir("${env.ProjDir1}") { 
+					stages {
 						stage('Build') {
 							steps {
-								sh 'mvn -B -DskipTests clean package'
+								dir("${env.ProjDir1}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
 							}
 						}
 						stage('Test') {
@@ -33,10 +35,12 @@ pipeline {
 					}
 				}
 				stage('stage project-b') {
-					dir("${env.ProjDir2}") { 
+					stages {
 						stage('Build') {
 							steps {
-								sh 'mvn -B -DskipTests clean package'
+								dir("${env.ProjDir2}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
 							}
 						}
 						stage('Test') {
@@ -57,10 +61,12 @@ pipeline {
 					}
 				}
 				stage('stage project-c') {
-					dir("${env.ProjDir1}") { 
+					stages {
 						stage('Build') {
 							steps {
-								sh 'mvn -B -DskipTests clean package'
+								dir("${env.ProjDir1}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
 							}
 						}
 						stage('Test') {
