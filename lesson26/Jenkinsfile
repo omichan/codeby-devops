@@ -1,6 +1,6 @@
 def runStage() {
    CHANGE_SET = sh (
-      script: 'git log -2 --name-only --oneline --pretty="format:"',
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
       returnStdout: true
    ).trim()
    echo "Current changeset: ${CHANGE_SET}"
@@ -29,7 +29,7 @@ pipeline {
 			parallel {
 				stage('stage project 1') {
 					when { 
-      					expression { runStage().contains(${env.ProjName1}) }
+      					expression { runStage().contains('${env.ProjName1}') }
    					}
 					stages {
 						stage('Build') {
