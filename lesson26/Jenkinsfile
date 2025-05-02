@@ -2,6 +2,9 @@ pipeline {
 	agent {
 			label 'maven'
 		}
+	tools {
+    maven 'maven-3.9.9'
+	}
 	environment {
         ProjDir1 = 'lesson26/Hello Devops'
 		ProjDir2 = 'lesson26/Hello Jenkins'
@@ -21,7 +24,9 @@ pipeline {
 						}
 						stage('Test') {
 							steps {
-								sh 'mvn test'
+								dir("${env.ProjDir1}") { 
+									sh 'mvn test'
+								}
 							}
 							post {
 								always {
