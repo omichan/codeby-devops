@@ -1,9 +1,11 @@
 pipeline { 
-    agent any 
+	agent {
+			label 'maven'
+		}
 	environment {
-        ProjDir1 = 'Hello Devops'
-		ProjDir2 = 'Hello Jenkins'
-        ProjDir3 = 'Hello World'
+        ProjDir1 = 'lesson26/Hello Devops'
+		ProjDir2 = 'lesson26/Hello Jenkins'
+        ProjDir3 = 'lesson26/Hello World'
     }
     stages { 
         stage("Compile & Build Binary") { 
