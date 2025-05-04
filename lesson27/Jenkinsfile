@@ -1,0 +1,178 @@
+def runStage1() {
+   CHANGE_SET = sh (
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
+      returnStdout: true
+   ).trim()
+   echo "Current changeset: ${CHANGE_SET}"
+   return (CHANGE_SET ==~ "(.*)lesson27/Hello Devops/(.*)")
+}
+
+def runStage2() {
+   CHANGE_SET = sh (
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
+      returnStdout: true
+   ).trim()
+   echo "Current changeset: ${CHANGE_SET}"
+   return (CHANGE_SET ==~ "(.*)lesson27/Hello Jenkins/(.*)")
+}
+
+def runStage3() {
+   CHANGE_SET = sh (
+      script: 'git log -1 --name-only --oneline --pretty="format:"',
+      returnStdout: true
+   ).trim()
+   echo "Current changeset: ${CHANGE_SET}"
+   return (CHANGE_SET ==~ "(.*)lesson27/Hello World/(.*)")
+}
+
+
+pipeline { 
+	agent {
+			label 'maven'
+		}
+	tools {
+    	maven 'maven'
+		jdk "JDK17"
+	}
+	environment {
+        ProjName1 = 'Hello Devops'
+		ProjName2 = 'Hello Jenkins'
+        ProjName3 = 'Hello World'		
+		projPath = 'lesson27/'
+        ProjDir1 = 'lesson27/Hello Devops'
+		ProjDir2 = 'lesson27/Hello Jenkins'
+        ProjDir3 = 'lesson27/Hello World'
+    }
+    stages { 
+        stage("Compile & Build Binary") { 
+			parallel {
+				stage('stage project 1') {
+					stages {
+						stage('Build') {
+//							when { 
+//								expression { runStage1() }
+//							}
+							steps {
+								dir("${env.ProjDir1}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
+							}
+						}
+						stage('Test') {
+//							when { 
+//								expression { runStage1() }
+//							}
+							steps {
+								dir("${env.ProjDir1}") { 
+									sh 'mvn test'
+								}
+							}
+							post {
+								always {
+									dir("${env.ProjDir1}") { 	
+										junit 'target/surefire-reports/*.xml'
+									}
+								}
+							}
+						}
+						stage('Deliver') { 
+//							when { 
+//								expression { runStage1() }
+//							}
+							steps {
+								dir("${env.ProjDir1}") { 
+									//sh './jenkins/scripts/deliver.sh' 
+									echo "Delivery skipped :)"
+								}
+							}
+						}
+					}
+				}
+				stage('stage project 2') {
+					stages {
+						stage('Build') {
+//							when { 
+//								expression { runStage2() }
+//							}
+							steps {
+								dir("${env.ProjDir2}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
+							}
+						}
+						stage('Test') {
+//							when { 
+//								expression { runStage2() }
+//							}
+							steps {
+								dir("${env.ProjDir2}") {
+									sh 'mvn test'
+								}
+							}
+							post {
+								always {
+									dir("${env.ProjDir2}") {
+										junit 'target/surefire-reports/*.xml'
+									}
+								}
+							}
+						}
+						stage('Deliver') { 
+//							when { 
+//								expression { runStage2() }
+//							}
+							steps {
+								dir("${env.ProjDir2}") { 
+									//sh './jenkins/scripts/deliver.sh' 
+									echo "Delivery skipped :)"
+								}
+							}
+						}
+					}
+				}
+				stage('stage project 3') {
+					stages {
+						stage('Build') {
+//							when { 
+//								expression { runStage3() }
+//							}
+							steps {
+								dir("${env.ProjDir3}") { 
+									sh 'mvn -B -DskipTests clean package'
+								}
+							}
+						}
+						stage('Test') {
+//							when { 
+//								expression { runStage3() }
+//							}
+							steps {
+								dir("${env.ProjDir3}") {
+									sh 'mvn test'
+								}
+							}
+							post {
+								always {
+									dir("${env.ProjDir3}") {
+										junit 'target/surefire-reports/*.xml'
+									}
+								}
+							}
+						}
+						stage('Deliver') { 
+//							when { 
+//								expression { runStage3() }
+//							}
+							steps {
+								dir("${env.ProjDir3}") { 
+									//sh './jenkins/scripts/deliver.sh' 
+									echo "Delivery skipped :)"
+								}
+							}
+						}
+					}
+				}
+            } 
+        } 
+    } 
+}

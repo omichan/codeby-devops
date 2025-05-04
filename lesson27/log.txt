@@ -1,0 +1,328 @@
+Started by user user
+Connecting to https://api.github.com with no credentials, anonymous access
+Obtained lesson26/Jenkinsfile from 334c332fbf238a809076c6b0f79bed2c2a0ca0df
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on maven in /home/jenkins/workspace/MP1_lesson26
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Fetching changes from the remote Git repository
+Fetching without tags
+ > git rev-parse --resolve-git-dir /home/jenkins/workspace/MP1_lesson26/.git # timeout=10
+ > git config remote.origin.url https://github.com/omichan/codeby-devops.git # timeout=10
+Fetching upstream changes from https://github.com/omichan/codeby-devops.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.2'
+ > git fetch --no-tags --force --progress -- https://github.com/omichan/codeby-devops.git +refs/heads/lesson26:refs/remotes/origin/lesson26 # timeout=10
+Checking out Revision 334c332fbf238a809076c6b0f79bed2c2a0ca0df (lesson26)
+Commit message: "check condition"
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 334c332fbf238a809076c6b0f79bed2c2a0ca0df # timeout=10
+ > git rev-list --no-walk fbe3979dc6da1d78dbd4d9009328015a8b02a1ef # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Compile & Build Binary)
+[Pipeline] parallel
+[Pipeline] { (Branch: stage project 1)
+[Pipeline] { (Branch: stage project 2)
+[Pipeline] { (Branch: stage project 3)
+[Pipeline] stage
+[Pipeline] { (stage project 1)
+[Pipeline] stage
+[Pipeline] { (stage project 2)
+[Pipeline] stage
+[Pipeline] { (stage project 3)
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
++ git log -1 --name-only --oneline '--pretty=format:'
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+Stage "Build" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+[Pipeline] // stage
+Stage "Build" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] tool
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] sh
+[Pipeline] envVarsForTool
+[Pipeline] sh
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dir
+Running in /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops
+[Pipeline] {
++ git log -1 --name-only --oneline '--pretty=format:'
+[Pipeline] sh
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+Stage "Test" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+Stage "Test" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
++ mvn -B -DskipTests clean package
+[Pipeline] // stage
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deliver)
+[Pipeline] stage
+[Pipeline] { (Deliver)
+[Pipeline] sh
+[Pipeline] sh
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
++ git log -1 --name-only --oneline '--pretty=format:'
+Current changeset: lesson26/Hello Devops/README.md
+Stage "Deliver" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+Stage "Deliver" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.mycompany.app:my-app >----------------------
+[INFO] Building my-app 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ my-app ---
+[INFO] Deleting /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/target
+[INFO] 
+[INFO] --- enforcer:3.5.0:enforce (enforce-maven) @ my-app ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ my-app ---
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ my-app ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ my-app ---
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ my-app ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ my-app ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ my-app ---
+[INFO] Building jar: /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/target/my-app-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.729 s
+[INFO] Finished at: 2025-05-02T16:25:31Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dir
+Running in /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops
+[Pipeline] {
+[Pipeline] sh
++ mvn test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.mycompany.app:my-app >----------------------
+[INFO] Building my-app 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.5.0:enforce (enforce-maven) @ my-app ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ my-app ---
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ my-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ my-app ---
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ my-app ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ my-app ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.mycompany.app.AppTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.144 s -- in com.mycompany.app.AppTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.057 s
+[INFO] Finished at: 2025-05-02T16:25:43Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+Post stage
+[Pipeline] dir
+Running in /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops
+[Pipeline] {
+[Pipeline] junit
+Recording test results
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deliver)
+[Pipeline] sh
++ git log -1 --name-only --oneline '--pretty=format:'
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named CHANGE_SET (to a value of type String) which could lead to memory leaks or other issues.
+[Pipeline] echo
+Current changeset: lesson26/Hello Devops/README.md
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dir
+Running in /home/jenkins/workspace/MP1_lesson26/lesson26/Hello Devops
+[Pipeline] {
+[Pipeline] echo
+Delivery skipped :)
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
