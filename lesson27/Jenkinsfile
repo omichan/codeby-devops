@@ -136,6 +136,26 @@ pipeline {
 								}
 							}
 						}
+						stage('SonarQube Analysis') {
+							//def mvn = tool 'Default Maven';
+							steps {
+								dir("${env.ProjDir2}") {
+									withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarServer') {
+										sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven2 -Dsonar.projectName='maven2'"
+									}
+								}
+							}
+						}
+						stage('SonarQube Quality') {
+							//def mvn = tool 'Default Maven';
+							steps {
+								dir("${env.ProjDir2}") {
+									sleep 60
+									waitForQualityGate abortPipeline: true
+								}
+							}
+						}
+
 						stage('Deliver') { 
 //							when { 
 //								expression { runStage2() }
@@ -178,6 +198,26 @@ pipeline {
 								}
 							}
 						}
+						stage('SonarQube Analysis') {
+							//def mvn = tool 'Default Maven';
+							steps {
+								dir("${env.ProjDir3}") {
+									withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarServer') {
+										sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven3 -Dsonar.projectName='maven3'"
+									}
+								}
+							}
+						}
+						stage('SonarQube Quality') {
+							//def mvn = tool 'Default Maven';
+							steps {
+								dir("${env.ProjDir3}") {
+									sleep 60
+									waitForQualityGate abortPipeline: true
+								}
+							}
+						}
+
 						stage('Deliver') { 
 //							when { 
 //								expression { runStage3() }
