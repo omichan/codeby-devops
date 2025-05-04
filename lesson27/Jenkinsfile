@@ -79,7 +79,7 @@ pipeline {
 							//def mvn = tool 'Default Maven';
 							steps {
 								dir("${env.ProjDir1}") {
-									withSonarQubeEnv(credentialsId: 'sonar', InstallationName: 'SonarServer') {
+									withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarServer') {
 										sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
 									}
 								}
