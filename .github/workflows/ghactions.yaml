@@ -78,6 +78,7 @@ jobs:
           path: ${{ env.stageName3 }}
   docker:
     runs-on: ubuntu-latest
+    needs: [publish-job]
     strategy:
       matrix:
         include:
@@ -97,8 +98,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
