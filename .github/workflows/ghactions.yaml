@@ -11,9 +11,9 @@ env:
   ProjName2: Hello Jenkins
   ProjName3: Hello World	
   projPath: lesson27/
-  ProjDir1: 'lesson27/Hello Devops'
-  ProjDir2: 'lesson27/Hello Jenkins'
-  ProjDir3: 'lesson27/Hello World'
+  ProjDir1: lesson27/Hello Devops
+  ProjDir2: lesson27/Hello Jenkins
+  ProjDir3: lesson27/Hello World
 
 jobs:
   build_app_hd:
@@ -40,4 +40,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2   
 
       - name: Build project
-        run: mvn -B package --file ${{ env.ProjDir1 }}/pom.xml
+        run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml"
