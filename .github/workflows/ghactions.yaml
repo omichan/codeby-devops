@@ -62,13 +62,12 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
       - run: pwd
-      - run: ls	  
-      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target/*.jar" ${{
-          env.stageName1 }}
-      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target/*.jar" ${{
-          env.stageName2 }}
-      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target/*.jar" ${{
-          env.stageName3 }}
+      - run: ls	"${{ env.ProjDir1 }}/target/"  
+      - run: ls	"${{ env.ProjDir2 }}/target/"   
+      - run: ls	"${{ env.ProjDir3 }}/target/"   	  
+      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target/*.jar" ${{ env.stageName1 }}
+      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target/*.jar" ${{ env.stageName2 }}
+      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target/*.jar" ${{ env.stageName3 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
