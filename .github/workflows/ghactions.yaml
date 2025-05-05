@@ -1,14 +1,22 @@
 ---
-name: learn-github-actions
+name: lesson28-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  push:
+    branches:
+      - 'lesson28'
+
+env:
+  ProjName1: Hello Devops
+  ProjName2: Hello Jenkins
+  ProjName3: Hello World	
+  projPath: lesson27/
+  ProjDir1: lesson27/Hello Devops
+  ProjDir2: lesson27/Hello Jenkins
+  ProjDir3: lesson27/Hello World
+
 jobs:
   build_app_hd:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print hello
-        run: echo "Hello world!"
-  git_app_hd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,5 +25,18 @@ jobs:
           show-progress: ""
           sparse-checkout: |
             lesson27
-      - name: print ls
-        run: ls
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17      		
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2   
+
+      - name: Build project
+        run: mvn -B package --file ${{ ProjDir1 }}/pom.xml
