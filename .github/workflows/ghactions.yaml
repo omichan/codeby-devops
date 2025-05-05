@@ -86,11 +86,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: lesson28/hello_devops
+          - image: lessoncodeby/hello_devops
             dockerfile: lesson28/Dockerfile1
-          - image: lesson28/hello_jenkins
+          - image: lessoncodeby/hello_jenkins
             dockerfile: lesson28/Dockerfile2
-          - image: lesson28/hello_world
+          - image: lessoncodeby/hello_world
             dockerfile: lesson28/Dockerfile3
     steps:
       - uses: actions/checkout@v4
