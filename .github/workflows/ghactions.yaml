@@ -61,21 +61,21 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
-      - run: mkdir stageName1  && cp "${{ env.ProjDir1 }}/target/*.jar" ${{
+      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target/*.jar" ${{
           env.stageName1 }}
-      - run: mkdir stageName2  && cp "${{ env.ProjDir2 }}/target/*.jar" ${{
+      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target/*.jar" ${{
           env.stageName2 }}
-      - run: mkdir stageName3  && cp "${{ env.ProjDir3 }}/target/*.jar" ${{
+      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target/*.jar" ${{
           env.stageName3 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
-          path: ${{ env.ProjDir1 }}/${{ env.stageName1 }}
+          path: "${{ env.ProjDir1 }}/${{ env.stageName1 }}"
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Jenkins Package
-          path: ${{ env.ProjDir2 }}/${{ env.stageName2 }}
+          path: "${{ env.ProjDir2 }}/${{ env.stageName2 }}"
       - uses: actions/upload-artifact@v4
         with:
           name: Hello World Package
-          path: ${{ env.ProjDir3 }}/${{ env.stageName3 }}
+          path: "${{ env.ProjDir3 }}/${{ env.stageName3 }}"
