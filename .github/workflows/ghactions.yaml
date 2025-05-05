@@ -61,6 +61,8 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
+      - run: pwd
+      - run: ls	  
       - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target/*.jar" ${{
           env.stageName1 }}
       - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target/*.jar" ${{
