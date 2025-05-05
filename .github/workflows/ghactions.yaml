@@ -61,9 +61,12 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
-      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{ env.stageName1 }}
-      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{ env.stageName2 }}
-      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{ env.stageName3 }}
+      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{
+          env.stageName1 }}
+      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{
+          env.stageName2 }}
+      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{
+          env.stageName3 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
@@ -78,7 +81,8 @@ jobs:
           path: ${{ env.stageName3 }}
   docker:
     runs-on: ubuntu-latest
-    needs: [publish-job]
+    needs:
+      - publish-job
     strategy:
       matrix:
         include:
@@ -95,21 +99,20 @@ jobs:
           show-progress: ""
           sparse-checkout: |
             lesson28
-    steps:
       - uses: actions/download-artifact@v4
         with:
-          name: "Hello Devops Package"
+          name: Hello Devops Package
           path: stageHD/app.jar
       - uses: actions/download-artifact@v4
         with:
-          name: "Hello Jenkins Package"
-          path: stageHJ/app.jar    
+          name: Hello Jenkins Package
+          path: stageHJ/app.jar
       - uses: actions/download-artifact@v4
         with:
-          name: "Hello World Package"
-          path: stageHW/app.jar            
-      - run: ls      
-      - run: pwd      
+          name: Hello World Package
+          path: stageHW/app.jar
+      - run: ls
+      - run: pwd
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
