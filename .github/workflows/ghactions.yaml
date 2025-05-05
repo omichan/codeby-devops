@@ -9,10 +9,10 @@ env:
   ProjName1: Hello Devops
   ProjName2: Hello Jenkins
   ProjName3: Hello World
-  projPath: lesson27/
-  ProjDir1: lesson27/Hello Devops
-  ProjDir2: lesson27/Hello Jenkins
-  ProjDir3: lesson27/Hello World
+  projPath: lesson28/
+  ProjDir1: lesson28/Hello Devops
+  ProjDir2: lesson28/Hello Jenkins
+  ProjDir3: lesson28/Hello World
   stageName1: stageHD
   stageName2: stageHJ
   stageName3: stageHW
@@ -25,7 +25,7 @@ jobs:
           ref: lesson28
           show-progress: ""
           sparse-checkout: |
-            lesson27
+            lesson28
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -53,7 +53,7 @@ jobs:
           ref: lesson28
           show-progress: ""
           sparse-checkout: |
-            lesson27
+            lesson28
       - uses: actions/setup-java@v4
         with:
           distribution: microsoft
@@ -61,12 +61,9 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
-      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{
-          env.stageName1 }}
-      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{
-          env.stageName2 }}
-      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{
-          env.stageName3 }}
+      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{ env.stageName1 }}
+      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{ env.stageName2 }}
+      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{ env.stageName3 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
@@ -85,7 +82,7 @@ jobs:
       matrix:
         include:
           - image: lesson28/hello_devops
-            dockerfile: app1/Dockerfile
+            dockerfile: lesson28/Dockerfile1
           - image: lesson28/hello_jenkins
             dockerfile: lesson28/Dockerfile2
           - image: lesson28/hello_world
@@ -114,4 +111,4 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }
+          labels: ${{ steps.meta.outputs.labels }}
