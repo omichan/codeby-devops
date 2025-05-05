@@ -71,12 +71,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
-          path: "${{ env.ProjDir1 }}/${{ env.stageName1 }}"
+          path: "${{ env.stageName1 }}"
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Jenkins Package
-          path: "${{ env.ProjDir2 }}/${{ env.stageName2 }}"
+          path: "${{ env.stageName2 }}"
       - uses: actions/upload-artifact@v4
         with:
           name: Hello World Package
-          path: "${{ env.ProjDir3 }}/${{ env.stageName3 }}"
+          path: "${{ env.stageName3 }}"
