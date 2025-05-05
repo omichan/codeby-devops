@@ -95,6 +95,21 @@ jobs:
           show-progress: ""
           sparse-checkout: |
             lesson28
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: "Hello Devops Package"
+          path: stageHD/app.jar
+      - uses: actions/download-artifact@v4
+        with:
+          name: "Hello Jenkins Package"
+          path: stageHJ/app.jar    
+      - uses: actions/download-artifact@v4
+        with:
+          name: "Hello World Package"
+          path: stageHW/app.jar            
+      - run: ls      
+      - run: pwd      
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
