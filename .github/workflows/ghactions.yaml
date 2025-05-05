@@ -61,18 +61,57 @@ jobs:
       - run: mvn -B package --file "${{ env.ProjDir1 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir2 }}/pom.xml" -DskipTests
       - run: mvn -B package --file "${{ env.ProjDir3 }}/pom.xml" -DskipTests
-      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{ env.stageName1 }}
-      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{ env.stageName2 }}
-      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{ env.stageName3 }}
+      - run: mkdir ${{ env.stageName1 }}  && cp "${{ env.ProjDir1 }}/target"/*.jar ${{
+          env.stageName1 }}
+      - run: mkdir ${{ env.stageName2 }}  && cp "${{ env.ProjDir2 }}/target"/*.jar ${{
+          env.stageName2 }}
+      - run: mkdir ${{ env.stageName3 }}  && cp "${{ env.ProjDir3 }}/target"/*.jar ${{
+          env.stageName3 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Devops Package
-          path: "${{ env.stageName1 }}"
+          path: ${{ env.stageName1 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello Jenkins Package
-          path: "${{ env.stageName2 }}"
+          path: ${{ env.stageName2 }}
       - uses: actions/upload-artifact@v4
         with:
           name: Hello World Package
-          path: "${{ env.stageName3 }}"
+          path: ${{ env.stageName3 }}
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: lesson28/hello_devops
+            dockerfile: app1/Dockerfile
+          - image: lesson28/hello_jenkins
+            dockerfile: lesson28/Dockerfile2
+          - image: lesson28/hello_world
+            dockerfile: lesson28/Dockerfile3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: lesson28
+          show-progress: ""
+          sparse-checkout: |
+            lesson28
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ matrix.image }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }
