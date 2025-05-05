@@ -39,4 +39,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2   
 
       - name: Build project
-        run: mvn -B package --file ${{ ProjDir1 }}/pom.xml
+        run: mvn -B package --file ${{ env.ProjDir1 }}/pom.xml
