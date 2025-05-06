@@ -1,0 +1,4 @@
+FROM openjdk:14-slim
+COPY stageHJ/*.jar app.jar
+EXPOSE 6379
+ENTRYPOINT ["java","-jar","app.jar"]
