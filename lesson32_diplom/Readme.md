@@ -1,0 +1,1 @@
+# Дипломный проект CI/CD расположен по адресу [https://github.com/omichan/kanban](https://github.com/omichan/kanban)
